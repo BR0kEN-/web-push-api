@@ -33,3 +33,13 @@ declare interface PushSubscriptionFlow {
    */
   unsubscribe(): Promise<null>;
 }
+
+export const isSupported: boolean;
+
+export function encodeKey(buffer: ArrayBuffer): string;
+
+export function decodeKey(encodedString: string): Uint8Array;
+
+export function getPushSubscriptionPayload(pushSubscription: PushSubscription): PushSubscriptionPayload;
+
+export function getPushSubscriptionFlow(sync: (method: PushSubscriptionHttpMethod, subscription: PushSubscription) => void): PushSubscriptionFlow;
