@@ -1,4 +1,5 @@
 declare type PushSubscriptionEncoding = 'aes128gm' | 'aesgcm';
+declare type PushSubscriptionHttpMethod = 'POST' | 'PATCH' | 'DELETE';
 
 declare interface PushSubscriptionPayload {
   readonly user_agent: string;
@@ -12,4 +13,23 @@ declare interface PushSubscriptionPayload {
 declare interface PushSubscriptionLogger {
   debug(...args: any[]): void;
   error(...args: any[]): void;
+}
+
+declare interface PushSubscriptionFlow {
+  getPermission(): Promise<NotificationPermission>;
+  /**
+   * @throws Error
+   *   When no appropriate permission given or subscription retrieval failed.
+   */
+  getSubscription(): Promise<PushSubscription | null>;
+  /**
+   * @param {string} applicationServerKey
+   *
+   * @throws Error
+   */
+  subscribe(applicationServerKey: string): Promise<PushSubscription>;
+  /**
+   * @throws Error
+   */
+  unsubscribe(): Promise<null>;
 }

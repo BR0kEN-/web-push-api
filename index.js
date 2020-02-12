@@ -63,11 +63,13 @@ export function getPushSubscriptionPayload(pushSubscription) {
 }
 
 /**
- * @param {function(method: ('POST'|'PATCH'|'DELETE'), subscription: PushSubscription): void} sync
+ * @param {function(method: PushSubscriptionHttpMethod, subscription: PushSubscription): void} sync
  *   The function to synchronize the subscription stored in a browser with servers that are going to
  *   be used as notifications dispatchers. This callback MUST NOT THROW exceptions since they will
  *   force the workflow to behave incorrectly.
  * @param {PushSubscriptionLogger} logger
+ *
+ * @return {PushSubscriptionFlow}
  *
  * @example
  * The flow with a sync function that correctly handles errors and doesn't let them break the flow.
@@ -88,9 +90,6 @@ export function getPushSubscriptionFlow(sync, logger = console) {
   let currentSubscription;
 
   return {
-    /**
-     * @return {Promise<NotificationPermission>}
-     */
     async getPermission() {
       const { debug } = getLogger('getPermission', logger);
 
@@ -103,12 +102,6 @@ export function getPushSubscriptionFlow(sync, logger = console) {
 
       return permission;
     },
-    /**
-     * @return {Promise<PushSubscription|null>}
-     *
-     * @throws Error
-     *   When no appropriate permission given or subscription retrieval failed.
-     */
     async getSubscription() {
       const { debug, error } = getLogger('getSubscription', logger);
 
@@ -133,13 +126,6 @@ export function getPushSubscriptionFlow(sync, logger = console) {
 
       return currentSubscription;
     },
-    /**
-     * @param {string} applicationServerKey
-     *
-     * @return {Promise<PushSubscription>}
-     *
-     * @throws Error
-     */
     async subscribe(applicationServerKey) {
       const { debug, error } = getLogger('subscribe', logger);
 
@@ -162,11 +148,6 @@ export function getPushSubscriptionFlow(sync, logger = console) {
 
       return currentSubscription;
     },
-    /**
-     * @return {Promise<null>}
-     *
-     * @throws Error
-     */
     async unsubscribe() {
       const { debug, error } = getLogger('unsubscribe', logger);
 
