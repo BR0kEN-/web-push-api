@@ -1,0 +1,19 @@
+{
+  "name": "web-push-api",
+  "bugs": "https://github.com/BR0kEN-/web-push-api/issues",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "license": "MIT",
+  "version": "0.0.1",
+  "homepage": "https://github.com/BR0kEN-/web-push-api",
+  "repository": "https://github.com/BR0kEN-/web-push-api.git",
+  "description": "Utility to subscribe/unsubscribe to Push API notifications and syncing with backend.",
+  "keywords": ["push api", "notifications", "web push"],
+  "author": {
+    "name": "Sergii Bondarenko (BR0kEN)",
+    "email": "sb@firstvector.org"
+  },
+  "optionalDependencies": {
+    "regenerator-runtime": "^0.13.3"
+  }
+}
