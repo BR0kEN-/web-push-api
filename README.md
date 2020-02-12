@@ -29,11 +29,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isSupported, getPushSubscriptionFlow, getPushSubscriptionPayload } from 'web-push-api';
 
-import request from 'your-request-lib';
 import Spinner from 'your-spinner-component';
 
 const flow = !isSupported ? null : getPushSubscriptionFlow((method, pushSubscription) => {
-  request(method, 'web-push-api/subscription', getPushSubscriptionPayload(pushSubscription))
+  fetch('https://example.com/web-push-api/subscription', { method, body: getPushSubscriptionPayload(pushSubscription) })
+    .then((response) => response.json())
     .then(({ errors }) => errors.map(showError))
     .catch(showError);
 });
