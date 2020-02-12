@@ -42,9 +42,13 @@
     ]
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
     "extends": "eslint:recommended",
     "env": {
       "browser": true
+    },
+    "globals": {
+      "Uint8Array": "readonly"
     }
   }
 }
