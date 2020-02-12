@@ -2,10 +2,9 @@
 
 .*
 
-!/.eslintrc
 !/.gitignore
-!/.npmrc
-!/index.js
 !/index.d.ts
+!/index.dist.js
+!/index.js
 !/package.json
 !/README.md
