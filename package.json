@@ -4,7 +4,7 @@
   "main": "index.dist.js",
   "types": "index.d.ts",
   "license": "MIT",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "homepage": "https://github.com/BR0kEN-/web-push-api",
   "repository": "https://github.com/BR0kEN-/web-push-api.git",
   "description": "Utility to subscribe/unsubscribe to Push API notifications and syncing with backend.",
@@ -26,9 +26,9 @@
     "@babel/cli": "7.8.4",
     "@babel/core": "7.8.4",
     "@babel/preset-env": "7.8.4",
-    "regenerator-runtime": "0.13.3",
     "babel-eslint": "10.0.3",
     "eslint": "6.8.0",
+    "fast-async": "^6.3.8",
     "husky": "4.2.2"
   },
   "husky": {
@@ -38,10 +38,24 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env",
+        {
+          "exclude": ["transform-async-to-generator", "transform-regenerator"]
+        }
+      ]
+    ],
+    "plugins": [
+      [
+        "module:fast-async",
+        {
+          "spec": true
+        }
+      ]
     ]
   },
   "eslintConfig": {
+    "root": true,
     "parser": "babel-eslint",
     "extends": "eslint:recommended",
     "env": {
